@@ -1,0 +1,1382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="1dp"
+    tools:context="com.nattysoft.trafficcop.Ticket">
+<ScrollView
+    android:id="@+id/scroll"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_above="@+id/button_next"
+    android:fillViewport="true" >
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    >
+
+    <TextView
+        android:id="@+id/ticket_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="INFRINGER AND MOTOR VEHICLE PARTICULARS"
+        android:background="@color/grey"/>
+
+    <ImageView
+        android:id="@+id/imageView_lic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ticket_title"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/lic1"/>
+
+    <TextView
+        android:id="@+id/surname_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/imageView_lic"
+        android:text="Surname : "
+        />
+    <EditText
+        android:id="@+id/surname_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/surname_label"
+        android:layout_below="@id/imageView_lic"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:text="Nkosi"/>
+
+    <View
+        android:id="@+id/surname_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/surname_label"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/first_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/surname_divider"
+        android:text="First names : "
+        />
+    <EditText
+        android:id="@+id/first_name_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/first_name_label"
+        android:layout_below="@id/surname_divider"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:text="Nkosinathi Emmanuel"/>
+
+    <View
+        android:id="@+id/firstname_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/first_name_label"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/initials_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/firstname_divider"
+        android:text="Initials : "
+        />
+    <EditText
+        android:id="@+id/initials_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/initials_label"
+        android:layout_below="@id/firstname_divider"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:text="N.E"/>
+
+    <TextView
+        android:id="@+id/dob_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/initials_field"
+        android:layout_toEndOf="@id/initials_field"
+        android:layout_below="@id/firstname_divider"
+        android:text="Date of birth : "
+        />
+    <EditText
+        android:id="@+id/dob_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/dob_label"
+        android:layout_below="@id/firstname_divider"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:text="1983/03/13"/>
+
+    <View
+        android:id="@+id/dob_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/dob_label"
+        android:background="@android:color/darker_gray"/>
+    <TextView
+        android:id="@+id/idtype_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/dob_divider"
+        android:text="ID type : "
+        />
+    <EditText
+        android:id="@+id/idtype_field_rsa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/idtype_label"
+        android:layout_below="@id/dob_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="RSA"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text="X"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_rsa"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/idtype_label"
+        android:layout_below="@id/dob_divider"
+        android:text="RSA"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+    <EditText
+        android:id="@+id/idtype_field_passport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/idtype_field_rsa"
+        android:layout_below="@id/dob_divider"
+        android:layout_marginRight="10dp"
+        android:hint="Passport"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:singleLine="true"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_passport"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/idtype_field_rsa"
+        android:layout_below="@id/dob_divider"
+        android:text="Passport"
+        android:paddingLeft="7dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/idtype_field_license"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/idtype_field_passport"
+        android:layout_below="@id/dob_divider"
+        android:layout_marginRight="10dp"
+        android:hint="License"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:singleLine="true"
+        android:textColorHint="#00FFFFFF" />
+    <TextView
+        android:id="@+id/constant_text_license"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/idtype_field_passport"
+        android:layout_below="@id/dob_divider"
+        android:text="License"
+        android:paddingLeft="7dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/idtype_field_foreign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/idtype_field_license"
+        android:layout_below="@id/dob_divider"
+        android:hint="Foreign"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:singleLine="true"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_foreign"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/idtype_field_license"
+        android:layout_below="@id/dob_divider"
+        android:text="Foreign"
+        android:paddingLeft="7dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <View
+        android:id="@+id/type_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/idtype_field_rsa"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/gender_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/type_divider"
+        android:text="Gender : "
+        />
+    <EditText
+        android:id="@+id/gender_field_male"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/gender_label"
+        android:layout_below="@id/type_divider"
+        android:layout_marginRight="10dp"
+        android:hint="Male"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:singleLine="true"
+        android:text="X"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_male"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/gender_label"
+        android:layout_below="@id/type_divider"
+        android:text="Male"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+    <EditText
+        android:id="@+id/gender_field_female"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/gender_field_male"
+        android:layout_below="@id/type_divider"
+        android:layout_marginRight="10dp"
+        android:hint="Female"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:singleLine="true"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_female"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/gender_field_male"
+        android:layout_below="@id/type_divider"
+        android:text="Female"
+        android:paddingLeft="7dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <View
+        android:id="@+id/gender_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/gender_field_female"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/id_number_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/gender_divider"
+        android:text="ID number : "
+        />
+    <EditText
+        android:id="@+id/id_number_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/id_number_label"
+        android:layout_below="@id/gender_divider"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:text="8303132977080"/>
+
+    <View
+        android:id="@+id/id_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/id_number_field"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/id_country_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/id_divider"
+        android:text="Country of issue : "
+        />
+    <EditText
+        android:id="@+id/id_country_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/id_country_label"
+        android:layout_below="@id/id_divider"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:text="South Africa"/>
+
+    <View
+        android:id="@+id/country_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/id_country_field"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/foreign_code_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/country_divider"
+        android:text="Foreign DL code : "
+        />
+    <EditText
+        android:id="@+id/foreign_code_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/foreign_code_label"
+        android:layout_below="@id/country_divider"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:ems="4"
+        android:text=""/>
+
+    <View
+        android:id="@+id/dl_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/foreign_code_label"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/licence_code_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/dl_divider"
+        android:text="Licence code : "
+        android:paddingBottom="10dp"
+        />
+    <EditText
+        android:id="@+id/licence_code_a1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/licence_code_label"
+        android:layout_below="@id/dl_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="A1"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:ems="2"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_a1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/licence_code_label"
+        android:layout_below="@id/dl_divider"
+        android:text="A1"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/licence_code_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/licence_code_a1"
+        android:layout_below="@id/dl_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="A"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:ems="2"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_a"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/licence_code_a1"
+        android:layout_below="@id/dl_divider"
+        android:text="A"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/licence_code_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/licence_code_a"
+        android:layout_below="@id/dl_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="B"
+        android:ems="2"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text="X"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_b"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/licence_code_a"
+        android:layout_below="@id/dl_divider"
+        android:text="B"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/licence_code_c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/licence_code_b"
+        android:layout_below="@id/dl_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="C1"
+        android:ems="2"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_c1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/licence_code_b"
+        android:layout_below="@id/dl_divider"
+        android:text="C1"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/licence_code_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toLeftOf="@id/licence_code_a1"
+        android:layout_below="@id/licence_code_label"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="C"
+        android:ems="2"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_c"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_alignLeft="@id/licence_code_c"
+        android:layout_below="@id/licence_code_label"
+        android:text="C"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/licence_code_eb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/licence_code_c"
+        android:layout_below="@id/licence_code_label"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="EB"
+        android:ems="2"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_eb"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/licence_code_c"
+        android:layout_below="@id/licence_code_label"
+        android:text="EB"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/licence_code_ec1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/licence_code_eb"
+        android:layout_below="@id/licence_code_label"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="EC1"
+        android:ems="2"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_ec1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/licence_code_eb"
+        android:layout_below="@id/licence_code_label"
+        android:text="EC1"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/licence_code_ec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/licence_code_ec1"
+        android:layout_below="@id/licence_code_label"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="EC"
+        android:ems="2"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_ec"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/licence_code_ec1"
+        android:layout_below="@id/licence_code_label"
+        android:text="EC"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/licence_code_none"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/licence_code_ec"
+        android:layout_below="@id/licence_code_label"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="NONE"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_none"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/licence_code_ec"
+        android:layout_below="@id/licence_code_label"
+        android:text="NONE"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <View
+        android:id="@+id/lic_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/constant_text_none"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+    android:id="@+id/learner_code_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@id/lic_divider"
+    android:text="Learner code : "
+    android:paddingBottom="10dp"
+    />
+
+    <EditText
+        android:id="@+id/learner_code_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/learner_code_label"
+        android:layout_below="@id/lic_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="1"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:ems="2"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/learner_code_label"
+        android:layout_below="@id/lic_divider"
+        android:text="1"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/learner_code_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/learner_code_1"
+        android:layout_below="@id/lic_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="2"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:ems="2"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/learner_code_1"
+        android:layout_below="@id/lic_divider"
+        android:text="2"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/learner_code_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/learner_code_2"
+        android:layout_below="@id/lic_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="3"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:ems="2"
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/constant_text_3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/learner_code_2"
+        android:layout_below="@id/lic_divider"
+        android:text="3"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <View
+        android:id="@+id/learn_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/constant_text_3"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/prdp_code_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/learn_divider"
+        android:text="PrDP code : "
+        android:paddingBottom="10dp"
+        />
+
+    <EditText
+        android:id="@+id/prdp_code_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/prdp_code_label"
+        android:layout_below="@id/learn_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="Goods"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/prdp_text_1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/prdp_code_label"
+        android:layout_below="@id/learn_divider"
+        android:text="Goods"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/prdp_code_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/prdp_code_1"
+        android:layout_below="@id/learn_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="Passengers"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/prdp_text_2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/prdp_code_1"
+        android:layout_below="@id/learn_divider"
+        android:layout_marginRight="5dp"
+        android:text="Passengers"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/prdp_code_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/prdp_code_2"
+        android:layout_below="@id/learn_divider"
+        android:layout_marginRight="5dp"
+        android:singleLine="true"
+        android:hint="Dangerous"
+        android:gravity="center"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""
+        android:textColorHint="#00FFFFFF"/>
+    <TextView
+        android:id="@+id/prdp_text_3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#C0C0C0"
+        android:layout_toRightOf="@id/prdp_code_2"
+        android:layout_below="@id/learn_divider"
+        android:text="Dangerous"
+        android:paddingLeft="4dp"
+        android:layout_marginTop="3dp"
+        android:singleLine="true"
+        android:background="@android:color/transparent" />
+
+    <View
+        android:id="@+id/prdp_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/prdp_text_3"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/postal_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/prdp_divider"
+        android:text="Postal Address and Code : "
+        android:paddingBottom="10dp"
+        />
+
+    <EditText
+        android:id="@+id/postal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:minLines="6"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/postal_label"
+        android:layout_below="@id/prdp_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="postal address"
+        android:gravity="center"
+        android:scrollbars="vertical"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""/>
+
+    <View
+        android:id="@+id/postal_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/postal"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/residencial_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/postal_divider"
+        android:text="Residencial Address and Code : "
+        android:paddingBottom="10dp"
+        />
+
+    <EditText
+        android:id="@+id/residencial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:minLines="6"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/residencial_label"
+        android:layout_below="@id/postal_divider"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:hint="residencial address"
+        android:gravity="center"
+        android:scrollbars="vertical"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""/>
+
+    <View
+        android:id="@+id/residencial_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/residencial"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+    android:id="@+id/employer_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@id/residencial_divider"
+    android:text="Employer Name and Address and Code : "
+    android:paddingBottom="10dp"
+    />
+
+    <EditText
+        android:id="@+id/employer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:minLines="6"
+        android:background="@drawable/edittextstyle"
+        android:layout_toRightOf="@id/employer_label"
+        android:layout_below="@id/residencial_divider"
+        android:layout_marginRight="10dp"
+        android:hint="employer Name and Address and Code"
+        android:gravity="center"
+        android:scrollbars="vertical"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:text=""/>
+
+    <View
+        android:id="@+id/employer_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/employer"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/vehicle_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/employer_divider"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="MOTOR VEHICLE PARTICULARS"
+        android:background="@color/grey"/>
+    <RelativeLayout
+        android:id="@+id/vehicle_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/vehicle_title"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/licence_no_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Vehicle licence no : "
+            android:paddingBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/licence_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextstyle"
+            android:layout_toRightOf="@id/licence_no_label"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:ellipsize="end"
+            android:text=""/>
+
+        <View
+            android:id="@+id/licence_no_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/licence_no"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/licence_disc_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/licence_no_divider"
+            android:text="Licence disc no : "
+            android:paddingBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/licence_disc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextstyle"
+            android:layout_toRightOf="@id/licence_disc_label"
+            android:layout_below="@id/licence_no_divider"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:focusable="false"
+            android:ellipsize="end"
+            android:cursorVisible="false"
+            android:text=""/>
+
+        <View
+            android:id="@+id/licence_disc_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/licence_disc"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/operator_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/licence_disc_divider"
+            android:text="Operator card no : "
+            android:paddingBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/operator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextstyle"
+            android:layout_toRightOf="@id/operator_label"
+            android:layout_below="@id/licence_disc_divider"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:ellipsize="end"
+            android:text=""/>
+
+        <View
+            android:id="@+id/operator_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/operator"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/desc_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/operator_divider"
+            android:text="Vehicle description (type) : "
+            android:paddingBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextstyle"
+            android:layout_toRightOf="@id/desc_label"
+            android:layout_below="@id/operator_divider"
+            android:singleLine="true"
+            android:gravity="center"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:ellipsize="end"
+            android:text=""/>
+
+        <View
+            android:id="@+id/desc_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/desc"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/gmv_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/desc_divider"
+            android:text="Vehicle GMV : "
+            android:paddingBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/gmv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextstyle"
+            android:layout_toRightOf="@id/gmv_label"
+            android:layout_below="@id/desc_divider"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:ellipsize="end"
+            android:text=""/>
+
+        <View
+            android:id="@+id/gmv_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/gmv"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/make_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/gmv_divider"
+            android:text="Make : "
+            android:paddingBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/make"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextstyle"
+            android:layout_toRightOf="@id/make_label"
+            android:layout_below="@id/gmv_divider"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:ellipsize="end"
+            android:text=""/>
+
+        <View
+            android:id="@+id/make_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/make"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/model_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/make_divider"
+            android:text="Series (model) : "
+            android:paddingBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextstyle"
+            android:layout_toRightOf="@id/model_label"
+            android:layout_below="@id/make_divider"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:ellipsize="end"
+            android:text=""/>
+
+        <View
+            android:id="@+id/model_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/model"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/colour_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/model_divider"
+            android:text="Colour : "
+            android:paddingBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/colour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextstyle"
+            android:layout_toRightOf="@id/colour_label"
+            android:layout_below="@id/model_divider"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:ellipsize="end"
+            android:text=""/>
+
+    </RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scan_car"
+        android:layout_below="@id/vehicle_title"
+        android:text="Scan Car"/>
+
+
+
+</RelativeLayout>
+</ScrollView>
+    <Button
+        android:id="@+id/button_next"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/colorPrimaryDark"
+        android:maxHeight="48dp"
+        android:text="Next"
+        android:textColor="#FFFFFF" />
+</RelativeLayout>

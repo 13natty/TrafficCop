@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">TrafficCop</string>
+    <string name="title_activity_arform">Accident Report Form</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="provinces_arrays">
+        <item>Select Province</item>
+        <item>Eastern Cape</item>
+        <item>Free State</item>
+        <item>Gauteng</item>
+        <item>KwaZulu Natal</item>
+        <item>Mpumalanga</item>
+        <item>North West</item>
+        <item>Northern Cape</item>
+        <item>Limpopo</item>
+        <item>Western Cape</item>
+    </string-array>
+
+    <string-array name="compass_array">
+        <item>Select Direction</item>
+        <item>North</item>
+        <item>South</item>
+        <item>East</item>
+        <item>West</item>
+    </string-array>
 </resources>

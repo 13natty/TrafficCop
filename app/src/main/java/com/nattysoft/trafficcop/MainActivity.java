@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     Button button_id_number;
     Button button_scan_license;
     Button scan_finger;
+    Button scan_number_plate;
+    Button ar_form;
     private String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -82,6 +84,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, ScanFinger.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
+        ar_form = (Button)findViewById(R.id.accident_report);
+        ar_form.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, ARForm.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });

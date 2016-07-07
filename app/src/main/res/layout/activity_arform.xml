@@ -1,0 +1,896 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.nattysoft.trafficcop.ARForm">
+
+    <ScrollView
+        android:id="@+id/ar_scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/button_print"
+        android:fillViewport="true" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            >
+
+            <TextView
+                android:id="@+id/ar_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Accident Report (AR) Form"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:id="@+id/applicable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/ar_title"
+                android:text="(* COMPLETE IF APPLICABLE)"
+                />
+
+            <View
+                android:id="@+id/applicable_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/applicable"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/area_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/applicable_divider"
+                android:text="Police Station Area : "
+                />
+            <EditText
+                android:id="@+id/area_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:ems="13"
+                android:layout_toRightOf="@id/area_label"
+                android:layout_below="@id/applicable_divider"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint="Where accident occured"
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/area_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/area_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/ar_no_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/area_divider"
+                android:text="AR no : "
+                />
+            <EditText
+                android:id="@+id/ar_no_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:ems="10"
+                android:layout_toRightOf="@id/ar_no_label"
+                android:layout_below="@id/area_divider"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint=""
+                android:layout_alignParentRight="true"/>
+            <View
+                android:id="@+id/ar_no_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/ar_no_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/cas_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/ar_no_divider"
+                android:text="CAS : "
+                />
+            <EditText
+                android:id="@+id/cas_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:ems="12"
+                android:layout_toRightOf="@id/cas_label"
+                android:layout_below="@id/ar_no_divider"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint=""
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/cas_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/cas_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/serial_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/cas_divider"
+                android:text="Serial number : "
+                />
+            <EditText
+                android:id="@+id/serial_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:ems="12"
+                android:layout_toRightOf="@id/serial_label"
+                android:layout_below="@id/cas_divider"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint=""
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/captiring_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/serial_field"
+                android:text="Captiring number : "
+                />
+            <EditText
+                android:id="@+id/captiring_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:ems="12"
+                android:layout_toRightOf="@id/captiring_label"
+                android:layout_below="@id/serial_field"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint=""
+                android:layout_alignParentRight="true"/>
+            <View
+                android:id="@+id/serial_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/captiring_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/accident_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/serial_divider"
+                android:text="Accident date : "
+                />
+
+            <EditText
+                android:id="@+id/accident_date_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:hint="Click to Select Date..."
+                android:ems="10"
+                android:layout_toRightOf="@id/accident_date_label"
+                android:layout_below="@id/serial_divider"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:editable="false"
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/accident_day_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/accident_date_field"
+                android:text="Day of the week : "
+                />
+
+            <EditText
+                android:id="@+id/accident_day_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:ems="7"
+                android:layout_toRightOf="@id/accident_day_label"
+                android:layout_below="@id/accident_date_field"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:editable="false"
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/involved_cars_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/accident_day_field"
+                android:text="Number of Vehicles involved : "
+                />
+
+            <EditText
+                android:id="@+id/involved_cars_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:ems="1"
+                android:inputType="number"
+                android:layout_toRightOf="@id/involved_cars_label"
+                android:layout_below="@id/accident_day_field"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/accident_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/involved_cars_field"
+                android:text="Time of accident : "
+                />
+
+            <EditText
+                android:id="@+id/accident_time_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:ems="7"
+                android:layout_toRightOf="@id/involved_cars_label"
+                android:layout_below="@id/involved_cars_field"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint="Click to set time"
+                android:editable="false"
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/accident_date_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/accident_time_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/location_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/accident_date_divider"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="LOCATION"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:id="@+id/built_up_area_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/location_title"
+                android:text="Built-up area : "
+                />
+            <EditText
+                android:id="@+id/built_up_area_field_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:layout_toRightOf="@id/built_up_area_label"
+                android:layout_below="@id/location_title"
+                android:layout_marginRight="10dp"
+                android:singleLine="true"
+                android:hint="YES"
+                android:gravity="center"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:text="X"
+                android:textColorHint="#00FFFFFF"/>
+            <TextView
+                android:id="@+id/constant_text_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="#C0C0C0"
+                android:layout_toRightOf="@id/built_up_area_label"
+                android:layout_below="@id/location_title"
+                android:text="YES"
+                android:paddingLeft="4dp"
+                android:layout_marginTop="3dp"
+                android:singleLine="true"
+                android:background="@android:color/transparent" />
+
+            <EditText
+                android:id="@+id/built_up_area_field_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:layout_toRightOf="@id/built_up_area_field_yes"
+                android:layout_below="@id/location_title"
+                android:layout_marginRight="10dp"
+                android:singleLine="true"
+                android:hint="NO"
+                android:gravity="center"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:layout_marginBottom="10dp"
+                android:textColorHint="#00FFFFFF"/>
+            <TextView
+                android:id="@+id/constant_text_no"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="#C0C0C0"
+                android:layout_toRightOf="@id/built_up_area_field_yes"
+                android:layout_below="@id/location_title"
+                android:text="NO"
+                android:paddingLeft="4dp"
+                android:layout_marginTop="3dp"
+                android:singleLine="true"
+                android:background="@android:color/transparent" />
+
+            <TextView
+                android:id="@+id/speed_limit_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/built_up_area_field_no"
+                android:text="Speed limit on road (km/h): "
+                />
+
+            <EditText
+                android:id="@+id/speed_limit_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:maxLength="3"
+                android:maxEms="1"
+                android:inputType="number"
+                android:layout_toRightOf="@id/speed_limit_label"
+                android:layout_below="@id/built_up_area_field_no"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/province_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/speed_limit_field"
+                android:text="Province : "
+                />
+
+            <Spinner
+                android:id="@+id/province_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#d11f08"
+                android:entries="@array/provinces_arrays"
+                android:layout_below="@id/speed_limit_field"
+                android:layout_toRightOf="@id/province_label"
+                 />
+
+            <TextView
+                android:id="@+id/road_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/province_spinner"
+                android:text="Street/road name/road number : "
+                />
+
+            <EditText
+                android:id="@+id/road_name_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:maxEms="1"
+                android:layout_below="@id/road_name_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/location_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/road_name_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/town_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/location_divider"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="TOWN/CITY"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:id="@+id/intersection_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/town_title"
+                android:text="*At intersection with (Street/road name/road no) : "
+                />
+
+            <EditText
+                android:id="@+id/intersection_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+
+                android:layout_below="@id/intersection_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/intersection_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/intersection_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/road_1_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/intersection_divider"
+                android:text="*Or between (Street/road name/road no) : "
+                />
+
+            <EditText
+                android:id="@+id/road_1_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+
+                android:layout_below="@id/road_1_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/road_2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/road_1_field"
+                android:text="and (Street/road name/road no) : "
+                />
+
+            <EditText
+                android:id="@+id/road_2_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+
+                android:layout_below="@id/road_2_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/road_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/road_2_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/suburb_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/road_divider"
+                android:text="*Suburb : "
+                />
+
+            <EditText
+                android:id="@+id/suburb_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+
+                android:layout_toRightOf="@id/suburb_label"
+                android:layout_below="@id/road_divider"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/city_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/suburb_field"
+                android:text="*City : "
+                />
+
+            <EditText
+                android:id="@+id/city_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:maxEms="1"
+                android:layout_toRightOf="@id/city_label"
+                android:layout_below="@id/suburb_field"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/city_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/city_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/rural_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/city_divider"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="FREEWAY/RURAL"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:id="@+id/rural_intersection_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rural_title"
+                android:text="*At intersection with (Street/road name/road no) : "
+                />
+
+            <EditText
+                android:id="@+id/rural_intersection_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+
+                android:layout_below="@id/rural_intersection_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/rural_intersection_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/rural_intersection_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/estimated_km_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rural_intersection_divider"
+                android:text="*Or approximately (km) : "
+                />
+
+            <EditText
+                android:id="@+id/estimated_km_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:layout_toRightOf="@id/estimated_km_label"
+                android:layout_below="@id/rural_intersection_divider"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/compass_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/estimated_km_field"
+                android:text="Compass direction : "
+                />
+
+            <Spinner
+                android:id="@+id/compass_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#d11f08"
+                android:entries="@array/compass_array"
+                android:layout_below="@id/estimated_km_field"
+                android:layout_toRightOf="@id/compass_label"
+                />
+
+            <TextView
+                android:id="@+id/reference_place_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/compass_spinner"
+                android:text="from : "
+                />
+
+            <EditText
+                android:id="@+id/reference_place_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:layout_below="@id/reference_place_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint="(Describe fixed point e.g. town, river, bridge, culvert, intersecting street or road, on/off ramp of interchange, name of building/house, pole no, etc)"
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/reference_place_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/reference_place_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/info_on_km_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reference_place_divider"
+                android:text="*Information on km marker: road no./section : "
+                />
+
+            <EditText
+                android:id="@+id/info_on_km_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:layout_below="@id/info_on_km_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/reference_km_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/info_on_km_field"
+                android:text="km : "
+                />
+
+            <EditText
+                android:id="@+id/reference_km_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:layout_toRightOf="@id/reference_km_label"
+                android:layout_below="@id/info_on_km_field"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/reference_km_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/reference_km_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/town_1_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reference_km_divider"
+                android:text="*Between : "
+                />
+
+            <EditText
+                android:id="@+id/town_1_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:layout_below="@id/town_1_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint="(city/town)"
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/town_2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/town_1_field"
+                android:text="and : "
+                />
+
+            <EditText
+                android:id="@+id/town_2_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:layout_below="@id/town_2_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint="(city/town)"
+                android:layout_alignParentRight="true"/>
+
+            <View
+                android:id="@+id/towns_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/town_2_field"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/x_co_ordinate_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/towns_divider"
+                android:text="*GPS reading X co_ordinate : "
+                />
+
+            <EditText
+                android:id="@+id/x_co_ordinate_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:layout_below="@id/towns_divider"
+                android:layout_toRightOf="@id/x_co_ordinate_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint=""
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/y_co_ordinate_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/x_co_ordinate_field"
+                android:text="*GPS reading Y co_ordinate : "
+                />
+
+            <EditText
+                android:id="@+id/y_co_ordinate_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextstyle"
+                android:layout_below="@id/x_co_ordinate_field"
+                android:layout_toRightOf="@id/y_co_ordinate_label"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:layout_marginBottom="10dp"
+                android:text=""
+                android:hint=""
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,5 +1,8 @@
 package com.nattysoft.trafficcop;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -69,6 +72,18 @@ public class Infringement extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            findBT();
+            openBT();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     // close the connection to bluetooth printer.
     void closeBT() throws IOException {
         try {
@@ -126,6 +141,7 @@ public class Infringement extends AppCompatActivity {
                 myLabel.setText("No bluetooth adapter available");
                 printButton.setText("No bluetooth adapter available");
                 printButton.setEnabled(false);
+
             }
 
             if(!mBluetoothAdapter.isEnabled()) {
@@ -136,18 +152,25 @@ public class Infringement extends AppCompatActivity {
             Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
 
             if(pairedDevices.size() > 0) {
+                boolean qsPrinterFound = false;
                 for (BluetoothDevice device : pairedDevices) {
 
                     // RPP300 is the name of the bluetooth printer device
                     // we got this name from the list of paired devices
                     if (device.getName().equals("Qsprinter")) {
+                        qsPrinterFound = true;
                         mmDevice = device;
                         printButton.setText("Print");
                         printButton.setEnabled(true);
                         break;
                     }
                 }
+                if (!qsPrinterFound){
+                    pairDevice();
+                }
                 return;
+            }else{
+                pairDevice();
             }
 
             myLabel.setText("Bluetooth device found.");
@@ -157,6 +180,26 @@ public class Infringement extends AppCompatActivity {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void pairDevice() {
+        new AlertDialog.Builder(this)
+                .setTitle("Pair QS Printer")
+                .setMessage("Paired QS Printer device not found, please pair bluetooth printer or continue.")
+                .setPositiveButton("Pair", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // open settings
+                        dialog.dismiss();
+                        startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Continue", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     // tries to open a connection to the bluetooth printer device

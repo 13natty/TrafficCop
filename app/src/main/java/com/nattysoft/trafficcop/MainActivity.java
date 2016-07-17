@@ -11,6 +11,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.microblink.activity.Pdf417ScanActivity;
@@ -32,11 +33,11 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     private static final int MY_REQUEST_CODE = 1337;
-    Button button_id_number;
-    Button button_scan_license;
-    Button scan_finger;
-    Button scan_number_plate;
-    Button ar_form;
+    ImageButton button_id_number;
+    ImageButton button_scan_license;
+    ImageButton scan_finger;
+    ImageButton scan_number_plate;
+    ImageButton ar_form;
     private String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button_id_number = (Button)findViewById(R.id.enter_id);
+        button_id_number = (ImageButton)findViewById(R.id.enter_id);
         button_id_number.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button_scan_license = (Button)findViewById(R.id.scan_license);
+        button_scan_license = (ImageButton)findViewById(R.id.scan_license);
         button_scan_license.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 // set your licence key
                 // obtain your licence key at http://microblink.com/login or
                 // contact us at http://help.microblink.com
-                intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "JPG6BFZQ-W5BQCZTJ-3NWKYPZS-4U357XQE-4DC5UI23-HNNHD2GC-DFRRANIZ-MMIGIAEN");
+                intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "AUA4DSKL-WMYKPWHC-DNXWKT24-BM6RVLKO-IDBBSYYQ-GUMWGEBV-DFRRANIZ-MMIGIYNP");
 
                 // disable showing of dialog after scan
                 intent.putExtra(Pdf417ScanActivity.EXTRAS_SHOW_DIALOG_AFTER_SCAN, false);
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        scan_finger = (Button)findViewById(R.id.scan_finger);
+        scan_finger = (ImageButton)findViewById(R.id.scan_finger);
         scan_finger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ar_form = (Button)findViewById(R.id.accident_report);
+        ar_form = (ImageButton)findViewById(R.id.accident_report);
         ar_form.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

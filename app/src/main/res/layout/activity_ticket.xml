@@ -1060,8 +1060,7 @@
         android:lines="8"
         android:minLines="6"
         android:background="@drawable/edittextstyle"
-        android:layout_toRightOf="@id/employer_label"
-        android:layout_below="@id/residencial_divider"
+        android:layout_below="@id/employer_label"
         android:layout_marginRight="10dp"
         android:hint="employer Name and Address and Code"
         android:gravity="center"
@@ -1098,12 +1097,79 @@
         android:visibility="gone">
 
         <TextView
+            android:id="@+id/exp_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Exp Date : "
+            android:paddingBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/exp_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextstyle"
+            android:layout_toRightOf="@id/exp_date_label"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:ellipsize="end"
+            android:text=""/>
+
+        <View
+            android:id="@+id/exp_date_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/exp_date"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/vin_no_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="VIN no : "
+            android:layout_below="@id/exp_date_divider"
+            android:paddingBottom="10dp"
+            />
+
+        <EditText
+            android:id="@+id/vin_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextstyle"
+            android:layout_toRightOf="@id/vin_no_label"
+            android:layout_below="@id/exp_date_divider"
+            android:layout_marginRight="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:ellipsize="end"
+            android:text=""/>
+
+        <View
+            android:id="@+id/vin_no_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/vin_no"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
             android:id="@+id/licence_no_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:text="Vehicle licence no : "
             android:paddingBottom="10dp"
+            android:layout_below="@id/vin_no_divider"
             />
 
         <EditText
@@ -1112,6 +1178,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edittextstyle"
             android:layout_toRightOf="@id/licence_no_label"
+            android:layout_below="@id/vin_no_divider"
             android:layout_marginRight="10dp"
             android:singleLine="true"
             android:gravity="center"

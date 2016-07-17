@@ -15,50 +15,107 @@
         android:layout_height="wrap_content"
         android:text="Choose Action"
         android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:id="@+id/enter_id"
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/buttons_table"
         android:layout_below="@id/title"
-        android:paddingTop="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter ID Number"
         android:layout_centerHorizontal="true"
-        />
+        android:paddingTop="25dp"
+        android:paddingLeft="30dp">
 
-    <Button
-        android:id="@+id/scan_license"
-        android:layout_below="@id/enter_id"
-        android:paddingTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan License"
-        android:layout_centerHorizontal="true"
-        />
-    <Button
-        android:id="@+id/scan_finger"
-        android:layout_below="@id/scan_license"
-        android:paddingTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan Finger"
-        android:layout_centerHorizontal="true"/>
+        <TableRow
+            android:layout_width="0dp">
 
-    <Button
-        android:id="@+id/scan_plate"
-        android:layout_below="@id/scan_finger"
-        android:paddingTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan Number Plate"
-        android:layout_centerHorizontal="true"/>
+            <ImageButton
+                android:id="@+id/enter_id"
+                android:padding="25dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@mipmap/idnumber"
+                android:layout_gravity="center"
+                android:layout_column="0" />
 
-    <Button
-        android:id="@+id/accident_report"
-        android:layout_below="@id/scan_plate"
-        android:paddingTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Accident Report (AR) Form"
-        android:layout_centerHorizontal="true"/>
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Id Number"
+            android:layout_centerHorizontal="true"/>
+
+        </TableRow>
+
+
+        <TableRow>
+
+            <ImageButton
+                android:id="@+id/scan_license"
+                android:padding="25dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@mipmap/scan_drivers"
+                android:layout_gravity="center"
+                android:layout_column="10" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scan Drivers License"
+                android:layout_centerHorizontal="true"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="0dp">
+            <ImageButton
+                android:id="@+id/scan_finger"
+                android:padding="25dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@mipmap/scan_finger"
+                android:layout_gravity="center"
+                android:layout_column="0"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scan Finger"
+                android:layout_centerHorizontal="true"/>
+        </TableRow>
+
+        <TableRow>
+            <ImageButton
+                android:id="@+id/scan_plate"
+                android:padding="25dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@mipmap/scan_plate"
+                android:layout_gravity="center"
+                android:layout_column="10" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scan Number Plate"
+                android:layout_centerHorizontal="true"/>
+        </TableRow>
+
+        <TableRow>
+
+            <ImageButton
+                android:id="@+id/accident_report"
+                android:padding="25dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@mipmap/accident_report"
+                android:layout_gravity="center"
+                android:layout_column="0" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accident Report"
+                android:layout_centerHorizontal="true"/>
+        </TableRow>
+
+    </TableLayout>
+
+
+
+
+
 </RelativeLayout>

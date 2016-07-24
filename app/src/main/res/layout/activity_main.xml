@@ -16,49 +16,16 @@
         android:text="Choose Action"
         android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:id="@+id/enter_id"
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridview"
         android:layout_below="@id/title"
-        android:paddingTop="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter ID Number"
-        android:layout_centerHorizontal="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:columnWidth="90dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
         />
-
-    <Button
-        android:id="@+id/scan_license"
-        android:layout_below="@id/enter_id"
-        android:paddingTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan License"
-        android:layout_centerHorizontal="true"
-        />
-    <Button
-        android:id="@+id/scan_finger"
-        android:layout_below="@id/scan_license"
-        android:paddingTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan Finger"
-        android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:id="@+id/scan_plate"
-        android:layout_below="@id/scan_finger"
-        android:paddingTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan Number Plate"
-        android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:id="@+id/accident_report"
-        android:layout_below="@id/scan_plate"
-        android:paddingTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Accident Report (AR) Form"
-        android:layout_centerHorizontal="true"/>
 </RelativeLayout>

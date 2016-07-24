@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Switch;
 
 import com.microblink.activity.Pdf417ScanActivity;
 import com.microblink.recognizers.BaseRecognitionResult;
@@ -44,12 +47,59 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(this));
+
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            Intent myIntent;
+
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                switch(position){
+                    case 0 :
+                        myIntent = new Intent(MainActivity.this, EnterID.class);
+                        MainActivity.this.startActivity(myIntent);
+                        break;
+                    case 1 :
+                        // Intent for Pdf417ScanActivity Activity
+                        Intent intent = new Intent(MainActivity.this, Pdf417ScanActivity.class);
+
+                        // set your licence key
+                        // obtain your licence key at http://microblink.com/login or
+                        // contact us at http://help.microblink.com
+                        intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "AUA4DSKL-WMYKPWHC-DNXWKT24-BM6RVLKO-IDBBSYYQ-GUMWGEBV-DFRRANIZ-MMIGIYNP");
+
+                        // disable showing of dialog after scan
+                        intent.putExtra(Pdf417ScanActivity.EXTRAS_SHOW_DIALOG_AFTER_SCAN, false);
+
+                        RecognitionSettings settings = new RecognitionSettings();
+                        // setup array of recognition settings (described in chapter "Recognition
+                        // settings and results")
+                        settings.setRecognizerSettingsArray(setupSettingsArray());
+                        intent.putExtra(Pdf417ScanActivity.EXTRAS_RECOGNITION_SETTINGS, settings);
+
+                        // Starting Activity
+                        startActivityForResult(intent, MY_REQUEST_CODE);
+                        break;
+                    case 2 :
+                        myIntent = new Intent(MainActivity.this, ScanFinger.class);
+                        MainActivity.this.startActivity(myIntent);
+                        break;
+                    case 3 :
+
+                        break;
+                    case 4 :
+                        myIntent = new Intent(MainActivity.this, ARForm.class);
+                        MainActivity.this.startActivity(myIntent);
+                        break;
+                }
+            }
+        });
+
         button_id_number = (Button)findViewById(R.id.enter_id);
         button_id_number.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, EnterID.class);
-                MainActivity.this.startActivity(myIntent);
+
             }
         });
 
@@ -57,25 +107,7 @@ public class MainActivity extends AppCompatActivity {
         button_scan_license.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent for Pdf417ScanActivity Activity
-                Intent intent = new Intent(MainActivity.this, Pdf417ScanActivity.class);
 
-                // set your licence key
-                // obtain your licence key at http://microblink.com/login or
-                // contact us at http://help.microblink.com
-                intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "AUA4DSKL-WMYKPWHC-DNXWKT24-BM6RVLKO-IDBBSYYQ-GUMWGEBV-DFRRANIZ-MMIGIYNP");
-
-                // disable showing of dialog after scan
-                intent.putExtra(Pdf417ScanActivity.EXTRAS_SHOW_DIALOG_AFTER_SCAN, false);
-
-                RecognitionSettings settings = new RecognitionSettings();
-                // setup array of recognition settings (described in chapter "Recognition
-                // settings and results")
-                settings.setRecognizerSettingsArray(setupSettingsArray());
-                intent.putExtra(Pdf417ScanActivity.EXTRAS_RECOGNITION_SETTINGS, settings);
-
-                // Starting Activity
-                startActivityForResult(intent, MY_REQUEST_CODE);
             }
         });
 
@@ -83,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
         scan_finger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, ScanFinger.class);
-                MainActivity.this.startActivity(myIntent);
             }
         });
 
@@ -92,8 +122,6 @@ public class MainActivity extends AppCompatActivity {
         ar_form.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, ARForm.class);
-                MainActivity.this.startActivity(myIntent);
             }
         });
     }

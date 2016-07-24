@@ -2,6 +2,8 @@ package com.nattysoft.trafficcop;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +32,7 @@ import com.microblink.results.barcode.BarcodeDetailedData;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.GregorianCalendar;
 
 public class Ticket extends AppCompatActivity {
 
@@ -54,7 +57,7 @@ public class Ticket extends AppCompatActivity {
                 // set your licence key
                 // obtain your licence key at http://microblink.com/login or
                 // contact us at http://help.microblink.com
-                intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "JPG6BFZQ-W5BQCZTJ-3NWKYPZS-4U357XQE-4DC5UI23-HNNHD2GC-DFRRANIZ-MMIGIAEN");
+                intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "AUA4DSKL-WMYKPWHC-DNXWKT24-BM6RVLKO-IDBBSYYQ-GUMWGEBV-DFRRANIZ-MMIGIYNP");
 
                 // disable showing of dialog after scan
                 intent.putExtra(Pdf417ScanActivity.EXTRAS_SHOW_DIALOG_AFTER_SCAN, false);
@@ -260,6 +263,23 @@ public class Ticket extends AppCompatActivity {
             Log.d(TAG, "DATA separates..........  " + Arrays.toString(separeted));
             Log.d(TAG, "DATA separated size..........  " + separeted.length);
             if(separeted.length == 15){
+
+                EditText exp_no = (EditText)findViewById(R.id.exp_date);
+                String expDateString =  separeted[14];
+                GregorianCalendar expDate = new GregorianCalendar( Integer.parseInt(expDateString.substring(0, 3)), Integer.parseInt(expDateString.substring(5, 6)), Integer.parseInt(expDateString.substring(8)) ); // midnight
+                GregorianCalendar now = new GregorianCalendar();
+
+                boolean isExpired = now.after( expDate );
+                if(isExpired){
+                    exp_no.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                }else{
+                    exp_no.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
+                }
+                exp_no.setText(separeted[14]);
+
+                EditText vin_no = (EditText)findViewById(R.id.vin_no);
+                vin_no.setText(separeted[12]);
+
                 EditText lic_no = (EditText)findViewById(R.id.licence_no);
                 lic_no.setText(separeted[6]);
 

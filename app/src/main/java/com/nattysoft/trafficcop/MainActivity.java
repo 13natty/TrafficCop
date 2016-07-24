@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 // set your licence key
                 // obtain your licence key at http://microblink.com/login or
                 // contact us at http://help.microblink.com
-                intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "JPG6BFZQ-W5BQCZTJ-3NWKYPZS-4U357XQE-4DC5UI23-HNNHD2GC-DFRRANIZ-MMIGIAEN");
+                intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "AUA4DSKL-WMYKPWHC-DNXWKT24-BM6RVLKO-IDBBSYYQ-GUMWGEBV-DFRRANIZ-MMIGIYNP");
 
                 // disable showing of dialog after scan
                 intent.putExtra(Pdf417ScanActivity.EXTRAS_SHOW_DIALOG_AFTER_SCAN, false);

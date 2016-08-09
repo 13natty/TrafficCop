@@ -10,11 +10,11 @@ import android.widget.ImageView;
 /**
  * Created by Nkosinathi on 2016/07/24.
  */
-public class ImageAdapter extends BaseAdapter {
+public class ChoicesImageAdapter extends BaseAdapter {
     private Context mContext;
 
     // Constructor
-    public ImageAdapter(Context c) {
+    public ChoicesImageAdapter(Context c) {
         mContext = c;
     }
 
@@ -50,8 +50,6 @@ public class ImageAdapter extends BaseAdapter {
 
     // Keep all Images in array
     public Integer[] mThumbIds = {
-            R.mipmap.idnumber, R.mipmap.scan_drivers,
-            R.mipmap.scan_finger, R.mipmap.scan_plate,
-            R.mipmap.accident_report, R.mipmap.view_reports
+            R.mipmap.location, R.mipmap.particulars
     };
 }

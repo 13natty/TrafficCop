@@ -1,7 +1,9 @@
 package com.nattysoft.trafficcop;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,10 +15,13 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.Toast;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -25,6 +30,7 @@ import java.util.UUID;
 
 public class Infringement extends AppCompatActivity {
 
+    private static final String TAG = Infringement.class.getSimpleName();
     // will show the statuses like bluetooth open, close or data sent
     TextView myLabel;
 
@@ -46,18 +52,14 @@ public class Infringement extends AppCompatActivity {
     volatile boolean stopWorker;
 
     Button printButton;
+    private boolean qsPrinterFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infringement);
 
-        try {
-            findBT();
-            openBT();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        new findBlueToothPrinterAsyncTask(getApplicationContext()).execute();
 
         printButton = (Button) findViewById(R.id.button_print);
         printButton.setOnClickListener(new View.OnClickListener() {
@@ -76,12 +78,7 @@ public class Infringement extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        try {
-            findBT();
-            openBT();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        new findBlueToothPrinterAsyncTask(getApplicationContext()).execute();
     }
 
     // close the connection to bluetooth printer.
@@ -152,7 +149,7 @@ public class Infringement extends AppCompatActivity {
             Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
 
             if(pairedDevices.size() > 0) {
-                boolean qsPrinterFound = false;
+                qsPrinterFound = false;
                 for (BluetoothDevice device : pairedDevices) {
 
                     // RPP300 is the name of the bluetooth printer device
@@ -160,8 +157,7 @@ public class Infringement extends AppCompatActivity {
                     if (device.getName().equals("Qsprinter")) {
                         qsPrinterFound = true;
                         mmDevice = device;
-                        printButton.setText("Print");
-                        printButton.setEnabled(true);
+
                         break;
                     }
                 }
@@ -216,8 +212,11 @@ public class Infringement extends AppCompatActivity {
             beginListenForData();
 
             myLabel.setText("Bluetooth Opened");
+            printButton.setText("Print");
+            printButton.setEnabled(true);
 
         } catch (Exception e) {
+            //Toast.makeText(getApplicationContext(), "Printer not available", Toast.LENGTH_LONG);
             e.printStackTrace();
         }
     }
@@ -295,5 +294,38 @@ public class Infringement extends AppCompatActivity {
         }
     }
 
+    class findBlueToothPrinterAsyncTask extends AsyncTask<Void, Void, Boolean> {
+        private Context mContext;
+        Mail m = new Mail("13natty@gmail.com", "awandenkosi");
 
+        public findBlueToothPrinterAsyncTask(Context context) {
+            mContext = context;
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+
+            if(aBoolean){
+                Log.d(TAG, "******************** found printer");
+                Toast.makeText(mContext, "Printer found", Toast.LENGTH_LONG).show();
+            }else{
+                Log.d(TAG,"******************** No printer found");
+                Toast.makeText(mContext, "No Printer found.", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+                findBT();
+                openBT();
+                return true;
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                return false;
+            }
+        }
+    }
 }

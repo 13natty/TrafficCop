@@ -25,4 +25,7 @@
         <item>East</item>
         <item>West</item>
     </string-array>
+    <string name="title_activity_accident_report_choices">AccidentReportChoices</string>
+    <string name="title_activity_arform_particulars">ARFormParticulars</string>
+    <string name="title_activity_accident_reports">AccidentReports</string>
 </resources>

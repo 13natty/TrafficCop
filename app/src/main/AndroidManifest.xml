@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,21 +13,48 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LicenseResultActivity" />
-        <activity android:name=".EnterID" />
-        <activity android:name=".Ticket" />
-        <activity android:name=".ScanFinger" />
-        <activity android:name=".Infringement" />
+        <activity
+            android:name=".LicenseResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EnterID"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ticket"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ScanFinger"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Infringement"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ARForm"
-            android:label="@string/title_activity_arform" >
+            android:label="@string/title_activity_arform"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".AccidentReportChoices"
+            android:label="@string/title_activity_accident_report_choices"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ARFormParticulars"
+            android:label="@string/title_activity_arform_particulars"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".AccidentReports"
+            android:label="@string/title_activity_accident_reports" >
         </activity>
     </application>
 

@@ -1,10 +1,14 @@
 package com.nattysoft.trafficcop;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -15,6 +19,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.microblink.activity.Pdf417ScanActivity;
 import com.microblink.recognizers.BaseRecognitionResult;
@@ -29,13 +34,27 @@ import com.microblink.recognizers.settings.RecognitionSettings;
 import com.microblink.recognizers.settings.RecognizerSettings;
 import com.microblink.results.barcode.BarcodeDetailedData;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.mail.AuthenticationFailedException;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int MY_REQUEST_CODE = 1337;
     private String TAG = MainActivity.class.getSimpleName();
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private Bitmap mImageBitmap;
+    private String mCurrentPhotoPath;
+
+    private Multipart _multipart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +99,54 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this.startActivity(myIntent);
                         break;
                     case 3 :
-
+                        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                            // Create the File where the photo should go
+                            File photoFile = null;
+                            try {
+                                photoFile = createImageFile();
+                            } catch (IOException ex) {
+                                // Error occurred while creating the File
+                                Log.i(TAG, "IOException");
+                            }
+                            // Continue only if the File was successfully created
+                            if (photoFile != null) {
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                            }
+                        }
                         break;
                     case 4 :
-                        myIntent = new Intent(MainActivity.this, ARForm.class);
+                        //myIntent = new Intent(MainActivity.this, ARForm.class);
+                        myIntent = new Intent(MainActivity.this, AccidentReportChoices.class);
+                        MainActivity.this.startActivity(myIntent);
+                        break;
+
+                    case 5 :
+                        //myIntent = new Intent(MainActivity.this, ARForm.class);
+                        myIntent = new Intent(MainActivity.this, AccidentReports.class);
                         MainActivity.this.startActivity(myIntent);
                         break;
                 }
             }
         });
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  // prefix
+                ".jpg",         // suffix
+                storageDir      // directory
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
     }
 
     private RecognizerSettings[] setupSettingsArray() {
@@ -218,7 +276,13 @@ public class MainActivity extends AppCompatActivity {
             intent.setType("text/plain");
             intent.putExtra("results", stringData);
             startActivity(intent);
+        } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+            new SendEmailAsyncTask(getApplicationContext()).execute();
+
+
         }
+
     }
 
     /**
@@ -245,5 +309,74 @@ public class MainActivity extends AppCompatActivity {
             //startActivity(Intent.createChooser(intent, getString(R.string.UseWith)));
         }
         return barcodeDataIsUrl;
+    }
+
+    class SendEmailAsyncTask extends AsyncTask<Void, Void, Boolean> {
+        private Context mContext;
+        Mail m = new Mail("13natty@gmail.com", "awandenkosi");
+
+        public SendEmailAsyncTask(Context context) {
+            mContext = context;
+            if (BuildConfig.DEBUG)
+                Log.v(SendEmailAsyncTask.class.getName(), "SendEmailAsyncTask()");
+
+            String[] toArr = {"13natty@gmail.com"};
+            m.setTo(toArr);
+            m.setFrom("trafficOfficer@saps.co.za");
+            m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
+            m.setBody("please find attached");
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+
+            if(aBoolean){
+                Log.d(TAG,"******************** emailed");
+                Toast.makeText(mContext, "Email was sent successfully.", Toast.LENGTH_LONG).show();
+            }else{
+                Log.d(TAG,"******************** failed emailed");
+                Toast.makeText(mContext, "Email was not sent.", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            if (BuildConfig.DEBUG) Log.v(SendEmailAsyncTask.class.getName(), "doInBackground()");
+            try {
+
+                try {
+                    mImageBitmap = MediaStore.Images.Media.getBitmap(MainActivity.this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    m.addAttachment(Uri.parse(mCurrentPhotoPath).getPath());
+
+
+                } catch (Exception e) {
+                    Toast.makeText(MainActivity.this, "There was a problem sending the email." + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.e("MailApp", "Could not send email", e);
+                }
+
+                if (m.send()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (AuthenticationFailedException e) {
+                Log.e(SendEmailAsyncTask.class.getName(), "Bad account details");
+                e.printStackTrace();
+                return false;
+            } catch (MessagingException e) {
+                Log.e(SendEmailAsyncTask.class.getName(), "failed, exception "+e.getMessage());
+                e.printStackTrace();
+                return false;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
     }
 }

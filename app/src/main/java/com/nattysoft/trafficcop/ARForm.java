@@ -10,18 +10,31 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TimePicker;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Array;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -29,13 +42,31 @@ import java.util.Locale;
 
 public class ARForm extends ActionBarActivity {
 
+    EditText area;
+    EditText ar_no;
+    EditText cas;
+    EditText serial_number;
+    EditText capturing_number;
+    // calender class's instance and get current date , month and year from calender
+    final Calendar c = Calendar.getInstance();
+    int mYear = c.get(Calendar.YEAR); // current year
+    int mMonth = c.get(Calendar.MONTH); // current month
+    int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+    int mDayWeek = c.get(Calendar.DAY_OF_WEEK); // day of week
+    int CalendarHour  = c.get(Calendar.HOUR_OF_DAY); // current hour
+    int CalendarMinute = c.get(Calendar.MINUTE); // current minute
+
     EditText date;
     EditText day;
+    EditText num_vehicles;
     EditText time;
     DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
     private EditText built_yes;
     private EditText built_no;
+
+    EditText speed_limit;
+    Spinner province;
 
     LocationManager locationManager;
     private double longitude;
@@ -49,6 +80,8 @@ public class ARForm extends ActionBarActivity {
     EditText city;
     EditText x_co_ordinate;
     EditText y_co_ordinate;
+
+    Button addToAR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,25 +100,40 @@ public class ARForm extends ActionBarActivity {
         locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
 
+        addToAR = (Button) findViewById(R.id.button_add_location);
+        addToAR.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                createPdf();
+                onBackPressed();
+            }
+        });
+
+        area = (EditText) findViewById(R.id.area_field);
+        ar_no = (EditText) findViewById(R.id.ar_no_field);
+        cas = (EditText) findViewById(R.id.cas_field);
+        serial_number = (EditText) findViewById((R.id.serial_field));
+        capturing_number = (EditText) findViewById(R.id.captiring_field);
+
         // initiate the date picker and a button
         date = (EditText) findViewById(R.id.accident_date_field);
+        date.setText(mDay+"/"+mMonth+"/"+mYear);
 
         //day of the week
         day = (EditText) findViewById(R.id.accident_day_field);
 
+        num_vehicles = (EditText) findViewById(R.id.involved_cars_field);
+
         // time of accident
         time = (EditText) findViewById(R.id.accident_time_field);
+        time.setText(CalendarHour + ":" + CalendarMinute);
 
         // perform click event on edit text
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // calender class's instance and get current date , month and year from calender
-                final Calendar c = Calendar.getInstance();
-                int mYear = c.get(Calendar.YEAR); // current year
-                int mMonth = c.get(Calendar.MONTH); // current month
-                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-                int mDayWeek = c.get(Calendar.DAY_OF_WEEK); // day of week
+
                 // date picker dialog
                 datePickerDialog = new DatePickerDialog(ARForm.this,
                         new DatePickerDialog.OnDateSetListener() {
@@ -133,10 +181,7 @@ public class ARForm extends ActionBarActivity {
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // calender class's instance and get current date , month and year from calender
-                final Calendar c = Calendar.getInstance();
-                int CalendarHour  = c.get(Calendar.HOUR_OF_DAY); // current hour
-                int CalendarMinute = c.get(Calendar.MINUTE); // current minute
+
                 // time picker dialog
                 timePickerDialog = new TimePickerDialog(ARForm.this,
                         new TimePickerDialog.OnTimeSetListener() {
@@ -171,6 +216,10 @@ public class ARForm extends ActionBarActivity {
                 built_yes.setText("");
             }
         });
+
+        speed_limit = (EditText)findViewById(R.id.speed_limit_field);
+
+        province = (Spinner) findViewById(R.id.province_spinner);
     }
 
     private void buildAlertMessageNoGps() {
@@ -275,5 +324,111 @@ public class ARForm extends ActionBarActivity {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {}
+    }
+
+    // Method for creating a pdf file from text, saving it then opening it for display
+    public void createPdf() {
+
+        Document doc = new Document();
+
+        try {
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir";
+
+            File dir = new File(path);
+            if(!dir.exists())
+                dir.mkdirs();
+
+            File file = new File(dir, "newFile.pdf");
+            FileOutputStream fOut = new FileOutputStream(file);
+
+            PdfWriter.getInstance(doc, fOut);
+
+            //open the document
+            doc.open();
+
+            Font titleFont= new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
+            Font subFontLabel = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
+            Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.NORMAL);
+
+            Paragraph p1 = new Paragraph();
+            p1.setAlignment(Paragraph.ALIGN_CENTER);
+            p1.setFont(titleFont);
+
+            p1.add(new Paragraph("Accident Report (AR)Form", titleFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Police Station Area : ", subFontLabel));
+            p1.add(new Paragraph("" + area.getText(), subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("AR no : ", subFontLabel));
+            p1.add(new Paragraph("" + ar_no.getText(), subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("CAS : ", subFontLabel));
+            p1.add(new Paragraph("" + cas.getText(), subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Serial number : ", subFontLabel));
+            p1.add(new Paragraph("" + serial_number.getText(), subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Capturing number : ", subFontLabel));
+            p1.add(new Paragraph("" + capturing_number.getText(), subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Accident Date : ", subFontLabel));
+            p1.add(new Paragraph("" + date.getText(), subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Day of the week : ", subFontLabel));
+            p1.add(new Paragraph("" + day.getText(), subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Number of Vehicles involved : ", subFontLabel));
+            p1.add(new Paragraph("" + num_vehicles.getText(), subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Time of accident : ", subFontLabel));
+            p1.add(new Paragraph("" + time.getText(), subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("LOCATION", titleFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Built-up area : ", subFontLabel));
+            p1.add(new Paragraph("" + built_yes.getText() == "X" ? "yes" : "no", subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Speed limit on road (km/h) : ", subFontLabel));
+            p1.add(new Paragraph("" + speed_limit.getText() == "X" ? "yes" : "no", subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Province : ", subFontLabel));
+            String[] mProvinceArray = getResources().getStringArray(R.array.provinces_arrays);
+            p1.add(new Paragraph("" + mProvinceArray[province.getSelectedItemPosition()], subFont));
+            addEmptyLine(p1, 1);
+
+            p1.add(new Paragraph("Street/road name/ road number : ", subFontLabel));
+            p1.add(new Paragraph("" + main_street.getText(), subFont));
+            addEmptyLine(p1, 1);
+
+            //add paragraph to document
+            doc.add(p1);
+
+        } catch (DocumentException de) {
+            Log.e("PDFCreator", "DocumentException:" + de);
+        } catch (IOException e) {
+            Log.e("PDFCreator", "ioException:" + e);
+        }
+        finally {
+            doc.close();
+        }
+    }
+
+    private static void addEmptyLine(Paragraph paragraph, int number) {
+        for (int i = 0; i < number; i++) {
+            paragraph.add(new Paragraph(" "));
+        }
     }
 }

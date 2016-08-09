@@ -20,8 +20,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':LibRecognizer')
+    compile 'com.itextpdf:itextg:5.5.9'
     compile 'com.android.support:appcompat-v7:23.4.0'
+    compile files('C:/Users/Nkosinathi/Documents/IdolApps/TrafficCop/libs/activation.jar')
+    compile files('C:/Users/Nkosinathi/Documents/IdolApps/TrafficCop/libs/additionnal.jar')
+    compile files('C:/Users/Nkosinathi/Documents/IdolApps/TrafficCop/libs/mail.jar')
 }

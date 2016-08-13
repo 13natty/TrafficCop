@@ -1,12 +1,10 @@
 package com.nattysoft.trafficcop;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.itextpdf.text.Document;
@@ -24,8 +23,6 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.microblink.activity.Pdf417ScanActivity;
-import com.microblink.recognizers.settings.RecognitionSettings;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,6 +43,7 @@ public class AccidentReportChoices extends ActionBarActivity {
     Button viewButton;
     Button sendButton;
     Button deleteButton;
+    ProgressBar sendEmailProgress;
     private String TAG = AccidentReportChoices.class.getSimpleName();
 
     @Override
@@ -56,12 +54,14 @@ public class AccidentReportChoices extends ActionBarActivity {
         report = (LinearLayout) findViewById(R.id.report_action);
         final String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir";
 
+        sendEmailProgress = (ProgressBar) findViewById(R.id.email_loading);
+
         viewButton = (Button)findViewById(R.id.view_report);
         viewButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                viewPdf("newFile.pdf", "Dir");
+                Util.viewPdf("newFile.pdf", "Dir", AccidentReportChoices.this);
             }
         });
 
@@ -236,25 +236,7 @@ public class AccidentReportChoices extends ActionBarActivity {
             doc.close();
         }
 
-        viewPdf("newFile.pdf", "Dir");
-    }
-
-    // Method for opening a pdf file
-    private void viewPdf(String file, String directory) {
-
-        File pdfFile = new File(Environment.getExternalStorageDirectory() + "/" + directory + "/" + file);
-        Uri path = Uri.fromFile(pdfFile);
-
-        // Setting the intent for pdf reader
-        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-        pdfIntent.setDataAndType(path, "application/pdf");
-        pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        try {
-            startActivity(pdfIntent);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(AccidentReportChoices.this, "Can't read pdf file", Toast.LENGTH_SHORT).show();
-        }
+        Util.viewPdf("newFile.pdf", "Dir", AccidentReportChoices.this);
     }
 
     class SendPDFEmailAsyncTask extends AsyncTask<Void, Void, Boolean> {
@@ -266,16 +248,23 @@ public class AccidentReportChoices extends ActionBarActivity {
             if (BuildConfig.DEBUG)
                 Log.v(SendPDFEmailAsyncTask.class.getName(), "SendPDFEmailAsyncTask()");
 
-            String[] toArr = {"13natty@gmail.com"};
+            String[] toArr = {"13natty@gmail.com","garthzu@gmail.com"};
             m.setTo(toArr);
             m.setFrom("trafficReport@saps.co.za");
             m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
             m.setBody("please find attached pdf");
         }
 
+        @Override public void onPreExecute() {
+            sendEmailProgress.setVisibility(View.VISIBLE);
+        }
+
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
+
+            sendEmailProgress.setVisibility(View.INVISIBLE);
+            recreate();
 
             if(aBoolean){
                 Log.d(TAG,"******************** emailed");

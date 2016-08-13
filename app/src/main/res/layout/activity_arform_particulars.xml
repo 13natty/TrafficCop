@@ -255,14 +255,15 @@
                 </TableRow>-->
             </TableLayout>
 
-
-
-
-
-
-
-
+            <Button android:id="@+id/button_add_particulars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADD TO ACCIDENT"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                />
         </RelativeLayout>
+
 
     </ScrollView>
 

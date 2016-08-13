@@ -320,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
             if (BuildConfig.DEBUG)
                 Log.v(SendEmailAsyncTask.class.getName(), "SendEmailAsyncTask()");
 
-            String[] toArr = {"13natty@gmail.com"};
+            String[] toArr = {"13natty@gmail.com","garthzu@gmail.com"};
             m.setTo(toArr);
             m.setFrom("trafficOfficer@saps.co.za");
             m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");

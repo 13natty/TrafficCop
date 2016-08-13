@@ -27,6 +27,7 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
 
     final int sdk = android.os.Build.VERSION.SDK_INT;
     int numDrivers = 1;
+    Button addToAR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,16 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
         setContentView(R.layout.activity_arform_particulars);
 
         addParticularsOfDriver();
+
+        addToAR = (Button) findViewById(R.id.button_add_particulars);
+        addToAR.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                //createPdf();
+                onBackPressed();
+            }
+        });
 
     }
 

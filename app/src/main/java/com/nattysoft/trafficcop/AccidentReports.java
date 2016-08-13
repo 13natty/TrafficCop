@@ -22,17 +22,18 @@ public class AccidentReports extends ActionBarActivity {
         setContentView(R.layout.activity_accident_reports);
 
         ListView lv;
-        ArrayList<String> FilesInFolder = GetFiles(Environment.getExternalStorageDirectory() + "/Dir/sent_ar");
+        final ArrayList<String> filesInFolder = GetFiles(Environment.getExternalStorageDirectory() + "/Dir/sent_ar");
         lv = (ListView)findViewById(R.id.filelist);
 
-        if(FilesInFolder != null) {
+        if(filesInFolder != null) {
             lv.setAdapter(new ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1, FilesInFolder));
+                    android.R.layout.simple_list_item_1, filesInFolder));
         }
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                // Clicking on items
+                // View clicked item as pdf
+                Util.viewPdf(filesInFolder.get(position), "/Dir/sent_ar", AccidentReports.this);
             }
         });
     }

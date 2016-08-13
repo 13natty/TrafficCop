@@ -296,8 +296,6 @@ public class Infringement extends AppCompatActivity {
 
     class findBlueToothPrinterAsyncTask extends AsyncTask<Void, Void, Boolean> {
         private Context mContext;
-        Mail m = new Mail("13natty@gmail.com", "awandenkosi");
-
         public findBlueToothPrinterAsyncTask(Context context) {
             mContext = context;
 

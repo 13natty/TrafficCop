@@ -1,4 +1,4 @@
-package com.nattysoft.trafficcop;
+package com.nattysoft.demo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -175,6 +175,7 @@ public class AccidentReportChoices extends ActionBarActivity {
                 report.setVisibility(View.INVISIBLE);
             }
         }
+
     }
 
     @Override

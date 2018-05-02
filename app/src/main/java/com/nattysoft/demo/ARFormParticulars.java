@@ -1,9 +1,9 @@
-package com.nattysoft.trafficcop;
+package com.nattysoft.demo;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -19,8 +19,14 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class ARFormParticulars extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
@@ -28,29 +34,72 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
     final int sdk = android.os.Build.VERSION.SDK_INT;
     int numDrivers = 1;
     Button addToAR;
+    List<Map<String, View>> listOfMaps;
+    JSONArray arrayCollected;
+    private static final String TAG = ARFormParticulars.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arform_particulars);
 
-        addParticularsOfDriver();
+        listOfMaps = new ArrayList<Map<String, View>>();
+        if(!getSavedData()) {
+            addParticularsOfDriver(null);
+        }
 
         addToAR = (Button) findViewById(R.id.button_add_particulars);
         addToAR.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                //createPdf();
+                collectInputs();
                 onBackPressed();
             }
         });
 
     }
 
-    @SuppressLint("NewApi")
-    private void addParticularsOfDriver() {
+    private void collectInputs() {
+        arrayCollected = new JSONArray();
+        JSONObject collected = new JSONObject();
+        for (int i=0; i<listOfMaps.size(); i++){
+            Map<String, View> views = listOfMaps.get(i);
+            try {
+                collected.put("ID type", ((EditText) views.get("ID type")).getText().toString());
+                collected.put("ID number", ((EditText) views.get("ID number")).getText().toString());
 
+                collected.put("Country Of Origin", ((EditText) views.get("Country Of Origin")).getText().toString());
+                collected.put("Age", ((EditText) views.get("Age")).getText().toString());
+
+                collected.put("Full Name", ((EditText) views.get("Full Name")).getText().toString());
+                collected.put("Surname", ((EditText) views.get("Surname")).getText().toString());
+
+                collected.put("Initials other names", ((EditText) views.get("Initials other names")).getText().toString());
+                collected.put("Residential/Home Address", ((EditText) views.get("Residential/Home Address")).getText().toString());
+
+                collected.put("Telephone Number", ((EditText) views.get("Telephone Number")).getText().toString());
+                collected.put("Work/Contact Address", ((EditText) views.get("Work/Contact Address")).getText().toString());
+
+                collected.put("Cellphone other Number", ((EditText) views.get("Cellphone other Number")).getText().toString());
+                collected.put("Driver Ethnicity", ((Spinner) views.get("Driver Ethnicity")).getSelectedItemPosition());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            arrayCollected.put(collected);
+        }
+
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("particulars", arrayCollected.toString());
+        editor.commit();
+    }
+
+    @SuppressLint("NewApi")
+    private void addParticularsOfDriver(JSONObject obj) {
+
+        Map<String, View> particulars = new HashMap<>();
         TableLayout arTable = (TableLayout)findViewById(R.id.particulars_table);
 
         if(numDrivers>1){
@@ -65,6 +114,7 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
             textview_title.setGravity(Gravity.CENTER);
             tr_title.setGravity(Gravity.CENTER);
 
+            particulars.put("title", textview_title);
             arTable.addView(tr_title, new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
         }
 
@@ -113,6 +163,15 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
             editTextId_number.setPadding(0, 0, 0, 15);
         }
         tr2.addView(editTextId_number);
+
+        particulars.put("ID type", editTextIdType);
+        particulars.put("ID number", editTextId_number);
+        if(obj!=null){
+            String str1 = obj.optString("ID type");
+            String str2 = obj.optString("ID number");
+            editTextIdType.setText(str1);
+            editTextId_number.setText(str2);
+        }
 
         arTable.addView(tr2, new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
@@ -164,6 +223,14 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
         }
         tr4.addView(editTextAge);
 
+        particulars.put("Country Of Origin", editTextCountryOfOrig);
+        particulars.put("Age", editTextAge);
+        if(obj!=null){
+            String str1 = obj.optString("Country Of Origin");
+            String str2 = obj.optString("Age");
+            editTextCountryOfOrig.setText(str1);
+            editTextAge.setText(str2);
+        }
         arTable.addView(tr4, new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         //----------------------------------------------- Name / Surname ------------------------------------------------
@@ -214,6 +281,14 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
         }
         tr6.addView(editTextSurname);
 
+        particulars.put("Full Name", editTextFullName);
+        particulars.put("Surname", editTextSurname);
+        if(obj!=null){
+            String str1 = obj.optString("Full Name");
+            String str2 = obj.optString("Surname");
+            editTextFullName.setText(str1);
+            editTextSurname.setText(str2);
+        }
         arTable.addView(tr6, new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         //----------------------------------------------- initials / othernames ------------------------------------------------
@@ -264,6 +339,14 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
         }
         tr8.addView(editTextAddress);
 
+        particulars.put("Initials other names", editTextInitials);
+        particulars.put("Residential/Home Address", editTextAddress);
+        if(obj!=null){
+            String str1 = obj.optString("Initials other names");
+            String str2 = obj.optString("Residential/Home Address");
+            editTextInitials.setText(str1);
+            editTextAddress.setText(str2);
+        }
         arTable.addView(tr8, new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         //----------------------------------------------- Telephone / Work Contact  ------------------------------------------------
@@ -314,6 +397,14 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
         }
         tr10.addView(editTextContact);
 
+        particulars.put("Telephone Number", editTextTelephone);
+        particulars.put("Work/Contact Address", editTextContact);
+        if(obj!=null){
+            String str1 = obj.optString("Telephone Number");
+            String str2 = obj.optString("Work/Contact Address");
+            editTextTelephone.setText(str1);
+            editTextContact.setText(str2);
+        }
         arTable.addView(tr10, new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         //----------------------------------------------- Cellphone / Race  ------------------------------------------------
@@ -386,7 +477,15 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
 
         tr12.addView(spinnerRace);
 
-        arTable.addView(tr12, new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT));
+        particulars.put("Cellphone other Number", editTextCelphone);
+        particulars.put("Driver Ethnicity", spinnerRace);
+        if(obj!=null){
+            String str1 = obj.optString("Cellphone other Number");
+            String str2 = obj.optString("Driver Ethnicity");
+            editTextCelphone.setText(str1);
+            spinnerRace.setSelection(Integer.parseInt(str2));
+        }
+        arTable.addView(tr12, new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         final Button addDriver = new Button(this);
         addDriver.setText("Add Driver "+String.valueOf((char)((numDrivers+1) + 64)));
@@ -395,9 +494,11 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
             public void onClick(View view) {
                 addDriver.setVisibility(View.INVISIBLE);
                 numDrivers++;
-                addParticularsOfDriver();
+                addParticularsOfDriver(null);
             }
         });
+
+        listOfMaps.add(particulars);
 
         TableRow tr13 = new TableRow(this);
         tr13.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -437,5 +538,29 @@ public class ARFormParticulars extends ActionBarActivity implements AdapterView.
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    public boolean getSavedData() {
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        String jsonString = sharedPref.getString("particulars", null);
+
+        if(jsonString!=null && !jsonString.isEmpty()) {
+            try {
+                JSONArray arrayRestored = new JSONArray(jsonString);
+                for (int i = 0; i < arrayRestored.length(); i++) {
+                    JSONObject obj = arrayRestored.getJSONObject(i);
+                    addParticularsOfDriver(obj);
+                    numDrivers+=(i+1);
+                }
+                if(arrayRestored.length()>0){
+                    return true;
+                }else{
+                    return false;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 }

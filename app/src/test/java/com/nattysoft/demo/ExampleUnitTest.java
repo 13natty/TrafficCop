@@ -1,4 +1,4 @@
-package com.nattysoft.trafficcop;
+package com.nattysoft.demo;
 
 import org.junit.Test;
 

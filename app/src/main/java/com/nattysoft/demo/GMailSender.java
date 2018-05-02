@@ -1,4 +1,4 @@
-package com.nattysoft.trafficcop;
+package com.nattysoft.demo;
 
 /**
  * Created by Nkosinathi on 2016/08/09.
@@ -19,7 +19,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.xml.datatype.Duration;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

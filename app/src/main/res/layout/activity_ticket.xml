@@ -6,7 +6,7 @@
     android:background="#FFFFFF"
     android:orientation="vertical"
     android:padding="1dp"
-    tools:context="com.nattysoft.trafficcop.Ticket">
+    tools:context="com.nattysoft.demo.Ticket">
 <ScrollView
     android:id="@+id/scroll"
     android:layout_width="fill_parent"
@@ -60,7 +60,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:singleLine="true"
-        android:text="Nkosi"/>
+        android:text="Simelane"/>
 
     <View
         android:id="@+id/surname_divider"
@@ -89,7 +89,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:singleLine="true"
-        android:text="Nkosinathi Emmanuel"/>
+        android:text="Nomthandazo Eunice"/>
 
     <View
         android:id="@+id/firstname_divider"
@@ -140,7 +140,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:singleLine="true"
-        android:text="1983/03/13"/>
+        android:text="1973/02/16"/>
 
     <View
         android:id="@+id/dob_divider"

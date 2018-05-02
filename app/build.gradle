@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
-        applicationId "com.nattysoft.trafficcop"
-        minSdkVersion 10
+        applicationId "com.idol.demo"
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -28,4 +28,8 @@ dependencies {
     compile files('C:/Users/Nkosinathi/Documents/IdolApps/TrafficCop/libs/activation.jar')
     compile files('C:/Users/Nkosinathi/Documents/IdolApps/TrafficCop/libs/additionnal.jar')
     compile files('C:/Users/Nkosinathi/Documents/IdolApps/TrafficCop/libs/mail.jar')
+    compile 'me.dm7.barcodescanner:zbar:1.9'
+    compile 'me.dm7.barcodescanner:zxing:1.9'
+    compile project(':PDF417Scanner')
+    compile 'com.android.support:support-v4:23.4.0'
 }

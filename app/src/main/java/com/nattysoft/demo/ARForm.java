@@ -1,4 +1,4 @@
-package com.nattysoft.trafficcop;
+package com.nattysoft.demo;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -22,9 +22,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TimePicker;
 
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -34,7 +34,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Array;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -127,7 +126,7 @@ public class ARForm extends ActionBarActivity {
 
         // time of accident
         time = (EditText) findViewById(R.id.accident_time_field);
-        time.setText(CalendarHour + ":" + CalendarMinute);
+        time.setText(CalendarHour + ":" + String.format("%02d", CalendarMinute));
 
         // perform click event on edit text
         date.setOnClickListener(new View.OnClickListener() {
@@ -345,6 +344,7 @@ public class ARForm extends ActionBarActivity {
 
             //open the document
             doc.open();
+            doc.add(new Chunk("")); // << this will do the trick.
 
             Font titleFont= new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
             Font subFontLabel = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
@@ -410,7 +410,8 @@ public class ARForm extends ActionBarActivity {
             addEmptyLine(p1, 1);
 
             p1.add(new Paragraph("Street/road name/ road number : ", subFontLabel));
-            p1.add(new Paragraph("" + main_street.getText(), subFont));
+            if(main_street!=null)
+                p1.add(new Paragraph("" + main_street.getText(), subFont));
             addEmptyLine(p1, 1);
 
             //add paragraph to document

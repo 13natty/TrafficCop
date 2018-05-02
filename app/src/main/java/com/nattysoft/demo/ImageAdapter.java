@@ -1,4 +1,4 @@
-package com.nattysoft.trafficcop;
+package com.nattysoft.demo;
 
 import android.content.Context;
 import android.widget.BaseAdapter;
@@ -10,11 +10,11 @@ import android.widget.ImageView;
 /**
  * Created by Nkosinathi on 2016/07/24.
  */
-public class ChoicesImageAdapter extends BaseAdapter {
+public class ImageAdapter extends BaseAdapter {
     private Context mContext;
 
     // Constructor
-    public ChoicesImageAdapter(Context c) {
+    public ImageAdapter(Context c) {
         mContext = c;
     }
 
@@ -50,6 +50,8 @@ public class ChoicesImageAdapter extends BaseAdapter {
 
     // Keep all Images in array
     public Integer[] mThumbIds = {
-            R.mipmap.location, R.mipmap.particulars
+            R.mipmap.idnumber, R.mipmap.scan_drivers,
+            R.mipmap.scan_finger, R.mipmap.scan_plate,
+            R.mipmap.accident_report, R.mipmap.view_reports
     };
 }

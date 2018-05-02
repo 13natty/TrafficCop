@@ -1,4 +1,4 @@
-package com.nattysoft.trafficcop;
+package com.nattysoft.demo;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

@@ -1,4 +1,4 @@
-package com.nattysoft.trafficcop;
+package com.nattysoft.demo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -57,7 +56,7 @@ public class Ticket extends AppCompatActivity {
                 // set your licence key
                 // obtain your licence key at http://microblink.com/login or
                 // contact us at http://help.microblink.com
-                intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "AUA4DSKL-WMYKPWHC-DNXWKT24-BM6RVLKO-IDBBSYYQ-GUMWGEBV-DFRRANIZ-MMIGIYNP");
+                intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "YK2YMQJG-NPTLQDVU-M7T6UZK2-7A5GUPWO-RECWCSC4-EZWVYJTN-LQTG2XBG-NVOHPPNZ");
 
                 // disable showing of dialog after scan
                 intent.putExtra(Pdf417ScanActivity.EXTRAS_SHOW_DIALOG_AFTER_SCAN, false);

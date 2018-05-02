@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nattysoft.trafficcop" >
+    package="com.nattysoft.demo" >
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.camera"/>
 
     <application
         android:allowBackup="true"
@@ -14,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.nattysoft.demo.MainActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,38 +27,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LicenseResultActivity"
+            android:name="com.nattysoft.demo.LicenseResultActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".EnterID"
+            android:name="com.nattysoft.demo.EnterID"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Ticket"
+            android:name="com.nattysoft.demo.Ticket"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ScanFinger"
+            android:name="com.nattysoft.demo.ScanFinger"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Infringement"
+            android:name="com.nattysoft.demo.Infringement"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ARForm"
+            android:name="com.nattysoft.demo.ARForm"
             android:label="@string/title_activity_arform"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".AccidentReportChoices"
+            android:name="com.nattysoft.demo.AccidentReportChoices"
             android:label="@string/title_activity_accident_report_choices"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ARFormParticulars"
+            android:name="com.nattysoft.demo.ARFormParticulars"
             android:label="@string/title_activity_arform_particulars"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".AccidentReports"
+            android:name="com.nattysoft.demo.AccidentReports"
             android:label="@string/title_activity_accident_reports" >
+        </activity>
+        <activity
+            android:name="com.nattysoft.demo.MyScanActivity">
+
+        </activity>
+        <activity
+            android:name="com.nattysoft.demo.ZxingScannerActivity">
+
         </activity>
     </application>
 

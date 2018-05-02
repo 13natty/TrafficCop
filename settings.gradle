@@ -1,1 +1,1 @@
-include ':app', ':LibRecognizer-javadoc', ':LibRecognizer'
+include ':app', ':LibRecognizer-javadoc', ':LibRecognizer', ':PDF417Scanner'

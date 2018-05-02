@@ -1,4 +1,4 @@
-package com.nattysoft.trafficcop;
+package com.nattysoft.demo;
 
 /**
  * Created by Nkosinathi on 2016/08/09.

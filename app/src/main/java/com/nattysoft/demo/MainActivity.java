@@ -1,26 +1,21 @@
-package com.nattysoft.trafficcop;
+package com.nattysoft.demo;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.Toast;
 
+import com.itextpdf.xmp.impl.Base64;
 import com.microblink.activity.Pdf417ScanActivity;
 import com.microblink.recognizers.BaseRecognitionResult;
 import com.microblink.recognizers.RecognitionResults;
@@ -33,14 +28,22 @@ import com.microblink.recognizers.blinkbarcode.zxing.ZXingScanResult;
 import com.microblink.recognizers.settings.RecognitionSettings;
 import com.microblink.recognizers.settings.RecognizerSettings;
 import com.microblink.results.barcode.BarcodeDetailedData;
+import com.microblink.results.barcode.BarcodeElement;
+import com.microblink.results.barcode.ElementType;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.X509EncodedKeySpec;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.crypto.Cipher;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -48,6 +51,9 @@ import javax.mail.Multipart;
 public class MainActivity extends AppCompatActivity {
 
     private static final int MY_REQUEST_CODE = 1337;
+    public static final int ZXING_OK = 313;
+    public final static String FORMAT = "format";
+    public final static String CONTENT = "content";
     private String TAG = MainActivity.class.getSimpleName();
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -80,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         // set your licence key
                         // obtain your licence key at http://microblink.com/login or
                         // contact us at http://help.microblink.com
-                        intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "AUA4DSKL-WMYKPWHC-DNXWKT24-BM6RVLKO-IDBBSYYQ-GUMWGEBV-DFRRANIZ-MMIGIYNP");
+                        intent.putExtra(Pdf417ScanActivity.EXTRAS_LICENSE_KEY, "YK2YMQJG-NPTLQDVU-M7T6UZK2-7A5GUPWO-RECWCSC4-EZWVYJTN-LQTG2XBG-NVOHPPNZ");
 
                         // disable showing of dialog after scan
                         intent.putExtra(Pdf417ScanActivity.EXTRAS_SHOW_DIALOG_AFTER_SCAN, false);
@@ -93,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Starting Activity
                         startActivityForResult(intent, MY_REQUEST_CODE);
+
                         break;
                     case 2 :
                         myIntent = new Intent(MainActivity.this, ScanFinger.class);
@@ -190,14 +197,24 @@ public class MainActivity extends AppCompatActivity {
                     boolean uncertainData = result.isUncertain();
                     // getRawData getter will return the raw data information object of barcode contents
                     BarcodeDetailedData rawData = result.getRawData();
+                    BarcodeElement[] elements = rawData.getElements();
+                    ElementType ele = elements[0].getElementType();
+                    byte[] byteArr = elements[0].getElementBytes();
                     // BarcodeDetailedData contains information about barcode's binary layout, if you
                     // are only interested in raw bytes, you can obtain them with getAllData getter
                     byte[] rawDataBuffer = rawData.getAllData();
 
+                    byte[] decryptedData;
+                    try {
+                        decryptedData = decryptRSA(rawDataBuffer);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     // if data is URL, open the browser and stop processing result
                     if (checkIfDataIsUrlAndCreateIntent(barcodeData)) {
                         return;
                     } else {
+                        String versionHex = "";
                         // add data to string builder
                         sb.append("PDF417 scan data");
                         if (uncertainData) {
@@ -216,6 +233,12 @@ public class MainActivity extends AppCompatActivity {
                                 sb.append((int) rawDataBuffer[i] & 0x0FF);
                                 if (i != rawDataBuffer.length - 1) {
                                     sb.append(", ");
+                                }
+                                if(i<4){
+                                    versionHex += Byte.parseByte(rawDataBuffer[i]+"");
+                                    if(i==3) {
+                                        Log.d(TAG, "barcode version = "+versionHex);
+                                    }
                                 }
                             }
                             sb.append("}\n\n\n");
@@ -281,6 +304,11 @@ public class MainActivity extends AppCompatActivity {
             new SendEmailAsyncTask(getApplicationContext()).execute();
 
 
+        }else if(resultCode == ZXING_OK){
+            Log.d(TAG, "YAY "+data);
+
+            Log.d(TAG, "content "+data.getStringExtra(CONTENT));
+            Log.d(TAG, "format "+data.getStringExtra(FORMAT));
         }
 
     }
@@ -320,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
             if (BuildConfig.DEBUG)
                 Log.v(SendEmailAsyncTask.class.getName(), "SendEmailAsyncTask()");
 
-            String[] toArr = {"13natty@gmail.com","garthzu@gmail.com"};
+            String[] toArr = {"13natty@gmail.com"};//,"garthzu@gmail.com"};
             m.setTo(toArr);
             m.setFrom("trafficOfficer@saps.co.za");
             m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
@@ -378,5 +406,23 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         }
+    }
+
+    public static byte[] decryptRSA(byte[] text) throws Exception
+    {
+        String publicKeyB64 = "MIGWAoGBAMqfGO9sPz+kxaRh/qVKsZQGul7NdG1gonSS3KPXTjtcHTFfexA4MkGA\n" +
+                "mwKeu9XeTRFgMMxX99WmyaFvNzuxSlCFI/foCkx0TZCFZjpKFHLXryxWrkG1Bl9+\n" +
+                "+gKTvTJ4rWk1RvnxYhm3n/Rxo2NoJM/822Oo7YBZ5rmk8NuJU4HLAhAYcJLaZFTO\n" +
+                "sYU+aRX4RmoF";
+        byte[] keyBytes = publicKeyB64.getBytes("utf-8");
+        X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        PublicKey key = keyFactory.generatePublic(spec);
+
+        byte[] dectyptedText = null;
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        dectyptedText = cipher.doFinal(text);
+        return dectyptedText;
     }
 }

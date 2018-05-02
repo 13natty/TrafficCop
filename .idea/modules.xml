@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LibRecognizer/LibRecognizer.iml" filepath="$PROJECT_DIR$/LibRecognizer/LibRecognizer.iml" />
       <module fileurl="file://$PROJECT_DIR$/LibRecognizer-javadoc/LibRecognizer-javadoc.iml" filepath="$PROJECT_DIR$/LibRecognizer-javadoc/LibRecognizer-javadoc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PDF417Scanner/PDF417Scanner.iml" filepath="$PROJECT_DIR$/PDF417Scanner/PDF417Scanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/TrafficCop.iml" filepath="$PROJECT_DIR$/TrafficCop.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
